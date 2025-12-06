@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from '../Components/Navbar';
 import PropertyToolbar from '../Components/Toolbar';
 import PropertySection from '../Components/Herosection';
+import Footer from '../Components/Footer';
+import EssentialToolsSection from '../Components/EssentialTool';
 
 const MainLayout = () => {
     return (
@@ -9,6 +11,9 @@ const MainLayout = () => {
             <Navbar></Navbar>
             <PropertyToolbar></PropertyToolbar>
             <PropertySection></PropertySection>
+            <EssentialToolsSection></EssentialToolsSection>
+            <Footer></Footer>
+            
         </div>
     );
 };
