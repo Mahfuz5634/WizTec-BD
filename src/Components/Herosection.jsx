@@ -72,7 +72,7 @@ const properties = [
 
 const PropertyPage = () => {
   const [showMobileFilters, setShowMobileFilters] = useState(false);
-
+  const [openImage, setOpenImage] = useState(null); 
   return (
     <section className="w-full bg-white">
       {/* Mobile Filters button */}
@@ -116,11 +116,17 @@ const PropertyPage = () => {
             </div>
             <div className="space-y-1 text-sm text-gray-600">
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="h-3 w-3 rounded border-gray-300" />
+                <input
+                  type="checkbox"
+                  className="h-3 w-3 rounded border-gray-300"
+                />
                 <span>Example Suburb 1</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="h-3 w-3 rounded border-gray-300" />
+                <input
+                  type="checkbox"
+                  className="h-3 w-3 rounded border-gray-300"
+                />
                 <span>Example Suburb 2</span>
               </label>
             </div>
@@ -135,14 +141,23 @@ const PropertyPage = () => {
               <button className="text-[11px] text-gray-400">▼</button>
             </div>
             <div className="space-y-1 text-sm text-gray-600">
-              {["House", "Land", "Apartment", "Town House", "Unit", "Acreage"].map(
-                (type) => (
-                  <label key={type} className="flex items-center gap-2">
-                    <input type="radio" name="type" className="h-3 w-3 border-gray-300" />
-                    <span>{type}</span>
-                  </label>
-                )
-              )}
+              {[
+                "House",
+                "Land",
+                "Apartment",
+                "Town House",
+                "Unit",
+                "Acreage",
+              ].map((type) => (
+                <label key={type} className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="type"
+                    className="h-3 w-3 border-gray-300"
+                  />
+                  <span>{type}</span>
+                </label>
+              ))}
             </div>
           </div>
 
@@ -157,7 +172,10 @@ const PropertyPage = () => {
             <div className="space-y-1 text-sm text-gray-600">
               {["Pet-friendly", "Parking", "Gym", "Private Pool"].map((a) => (
                 <label key={a} className="flex items-center gap-2">
-                  <input type="checkbox" className="h-3 w-3 rounded border-gray-300" />
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 rounded border-gray-300"
+                  />
                   <span>{a}</span>
                 </label>
               ))}
@@ -174,16 +192,22 @@ const PropertyPage = () => {
                 key={p.id}
                 className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm"
               >
-                <div className="h-40 w-full sm:h-44 md:h-48">
+                <button
+                  type="button"
+                  onClick={() => setOpenImage(p)}
+                  className="block h-40 w-full sm:h-44 md:h-48 focus:outline-none"
+                >
                   <img
                     src={p.image}
                     alt={p.title}
                     className="h-full w-full object-cover"
                   />
-                </div>
+                </button>
 
                 <div className="space-y-2 p-4">
-                  <h3 className="text-sm font-semibold text-gray-900">{p.title}</h3>
+                  <h3 className="text-sm font-semibold text-gray-900">
+                    {p.title}
+                  </h3>
 
                   <div className="flex items-baseline gap-1">
                     <span className="text-sm font-semibold text-[#7b144b]">
@@ -252,6 +276,25 @@ const PropertyPage = () => {
               </button>
             </div>
 
+          </div>
+        </div>
+      )}
+
+      {/*MODAL */}
+      {openImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
+          <div className="relative max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-2xl bg-white">
+            <button
+              onClick={() => setOpenImage(null)}
+              className="absolute right-3 top-3 z-10 rounded-full bg-black/60 px-2 py-1 text-xs text-white"
+            >
+              ✕
+            </button>
+            <img
+              src={openImage.image}
+              alt={openImage.title}
+              className="h-full w-full max-h-[90vh] object-contain"
+            />
           </div>
         </div>
       )}
